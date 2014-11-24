@@ -1,15 +1,37 @@
-## Put comments here that give an overall description of what your
-## functions do
+## https://github.com/cyrussafaei/ProgrammingAssignment2.git
 
-## Write a short comment describing this function
+## JHU: R programming Assignemnt 2
+# makeCacheMatrix function set and get the vakue of a matrix and then set and get the reverse values  
 
 makeCacheMatrix <- function(x = matrix()) {
+    i <- NULL
+    set <- function(y) {
+      x <<- y
+      i <<- NULL
+    }
+    get <- function() x
+    setinverse <- function(inverse) i <<- inverse
+    getinverse <- function() i
+    list(
+      set = set,
+      get = get,
+      setinverse = setinverse,
+      getinverse = getinverse)
+  }  
 
-}
 
 
-## Write a short comment describing this function
+# The cacheSolve function calculates the inverse of the special "matrix"
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  ## Return a matrix that is the inverse of 'x'
+  i <- x$getinverse()
+  if(!is.null(i)) {
+    message("getting cached data")
+    return(i)
+  }
+  data <- x$get()
+  i <- solve(data, ...)
+  x$setinverse(i)
+  i
 }
